@@ -5,7 +5,7 @@ EASE enables small language models to **selectively activate safety reasoning** 
 
 ---
 
-## 🔍 Overview
+## Overview
 
 Small language models (SLMs) are widely deployed on edge and resource-constrained devices, but they are particularly vulnerable to jailbreak attacks. Existing alignment approaches face a trade-off:
 
