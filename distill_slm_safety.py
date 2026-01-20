@@ -47,13 +47,13 @@ def format_dataset(example, tokenizer, max_length):
     """
     eos_token = tokenizer.eos_token
 
-    #prompt = f"<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n{example['original_question']}<|im_end|>\n<|im_start|>assistant\n{example['response']}<|im_end|>"
-    prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
-Cutting Knowledge Date: December 2023
-Today Date: 23 July 2024
-You are a helpful assistant<|eot_id|><|start_header_id|>user<|end_header_id|>
-{example['original_question']}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
-{example['response']}<|eot_id|>"""
+    prompt = f"<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n{example['original_question']}<|im_end|>\n<|im_start|>assistant\n{example['response']}<|im_end|>"
+    #prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
+#Cutting Knowledge Date: December 2023
+#Today Date: 23 July 2024
+#You are a helpful assistant<|eot_id|><|start_header_id|>user<|end_header_id|>
+#{example['original_question']}<|eot_id|><|start_header_id|>assistant<|end_header_id|>
+#{example['response']}<|eot_id|>"""
 
     encoded = tokenizer(
         prompt,
@@ -126,13 +126,13 @@ def main():
     )
 
     tokenizer = AutoTokenizer.from_pretrained(args.model_name)
-    #tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
-    #print(f"Added custom padding token: {tokenizer.pad_token}")
-    #special_tokens_dict = {'additional_special_tokens': ['<think>', '</think>']}
-    #tokenizer.add_special_tokens(special_tokens_dict)
-    #model.resize_token_embeddings(len(tokenizer))
+    tokenizer.add_special_tokens({"pad_token": "<|pad|>"})
+    print(f"Added custom padding token: {tokenizer.pad_token}")
+    special_tokens_dict = {'additional_special_tokens': ['<think>', '</think>']}
+    tokenizer.add_special_tokens(special_tokens_dict)
+    model.resize_token_embeddings(len(tokenizer))
 
-    #print(f"Added special tokens: {special_tokens_dict['additional_special_tokens']}")
+    print(f"Added special tokens: {special_tokens_dict['additional_special_tokens']}")
 
     # Update tokenizer with new max length if possible
     if hasattr(tokenizer, 'model_max_length'):
@@ -208,14 +208,13 @@ def main():
         load_best_model_at_end=False,
         remove_unused_columns=False,
         gradient_checkpointing=True,
-        report_to="none",  # Disable wandb reporting
-        dataloader_drop_last=True,  # Prevent issues with last batch
-        lr_scheduler_type="cosine",  # Using cosine scheduler
-        max_grad_norm=1.0,  # Gradient clipping
-        seed=args.seed,  # Set seed for training
-        # Added to save disk space - always save to the same file
-        save_total_limit=1,  # Keep only the most recent checkpoint
-        overwrite_output_dir=args.overwrite_output_dir,  # Overwrite the output directory
+        report_to="none", 
+        dataloader_drop_last=True,  
+        lr_scheduler_type="cosine",  
+        max_grad_norm=1.0,  
+        seed=args.seed,  
+        save_total_limit=1,  
+        overwrite_output_dir=args.overwrite_output_dir,  
     )
 
     # Initialize Trainer
@@ -225,7 +224,7 @@ def main():
         train_dataset=training_dataset,
         data_collator=data_collator,
         tokenizer=tokenizer,
-        optimizers=(get_optimizer(model, training_args), None),  # Custom optimizer
+        optimizers=(get_optimizer(model, training_args), None),  
     )
 
     # Start training
