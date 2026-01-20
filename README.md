@@ -27,3 +27,7 @@ This results in:
 - Up to **17% lower jailbreak success rate** vs. refusal training  
 - Up to **90% lower inference overhead** vs. deliberative alignment  
 - Near-zero degradation on general task performance (MMLU, GSM8K, HellaSwag)
+
+<p align="center">
+  <img src="workflow.png" width="700">
+</p>
