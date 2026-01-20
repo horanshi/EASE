@@ -47,7 +47,7 @@ def format_dataset(example, tokenizer, max_length):
     """
     eos_token = tokenizer.eos_token
 
-    prompt = f"<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n{example['original_question']}<|im_end|>\n<|im_start|>assistant\n{example['response']}<|im_end|>"
+    prompt = f"<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n{example['original_question']}<|im_end|>\n<|im_start|>assistant\n<think>{example['response']}<|im_end|>"
     #prompt = f"""<|begin_of_text|><|start_header_id|>system<|end_header_id|>
 #Cutting Knowledge Date: December 2023
 #Today Date: 23 July 2024
