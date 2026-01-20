@@ -1,12 +1,7 @@
 # EASE
 The source code of the paper "EASE: Practical and Efficient Safety Alignment for Small Language Models", in the 40th Annual AAAI Conference on Artificial Intelligence (AAAI 2026)
 
-This repository contains the official implementation of **EASE**, a two-phase safety alignment framework for small language models (SLMs), introduced in the paper:
-
-> **EASE: Practical and Efficient Safety Alignment for Small Language Models**  
-> Haonan Shi, Guoli Wang, Tu Ouyang, An Wang  
-> Case Western Reserve University  
-> arXiv: 2511.06512
+This repository contains the official implementation of **EASE**, a two-phase safety alignment framework for small language models (SLMs)
 
 EASE enables small language models to **selectively activate safety reasoning** for adversarial jailbreak queries while preserving **low inference overhead** for benign and straightforward harmful queries.
 
