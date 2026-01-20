@@ -138,10 +138,17 @@ def main():
     if hasattr(tokenizer, 'model_max_length'):
         tokenizer.model_max_length = args.max_length
 
-    # Load general dataset
-    print("Loading dataset...")
-    dataset_safety = load_dataset('json', data_files=args.dataset_name)
-    print("General dataset structure:", dataset_safety)
+    # Load general datasets
+    dataset_name = args.dataset_name
+
+    if os.path.exists(dataset_name):
+        print("Loading dataset...")
+        dataset_safety = load_dataset('json', data_files=args.dataset_name)
+        print("General dataset structure:", dataset_safety)
+    else:
+        print("Loading dataset...")
+        dataset_safety = load_dataset(dataset_name)
+        print("General dataset structure:", dataset_safety)
 
     # Process general dataset
     if 'train' in dataset_safety:
@@ -204,17 +211,17 @@ def main():
         bf16=True,
         logging_steps=10,
         save_strategy="epoch",
-        evaluation_strategy="no",
         load_best_model_at_end=False,
         remove_unused_columns=False,
         gradient_checkpointing=True,
-        report_to="none", 
-        dataloader_drop_last=True,  
-        lr_scheduler_type="cosine",  
-        max_grad_norm=1.0,  
-        seed=args.seed,  
-        save_total_limit=1,  
-        overwrite_output_dir=args.overwrite_output_dir,  
+        report_to="none",  # Disable wandb reporting
+        dataloader_drop_last=True,  # Prevent issues with last batch
+        lr_scheduler_type="cosine",  # Using cosine scheduler
+        max_grad_norm=1.0,  # Gradient clipping
+        seed=args.seed,  # Set seed for training
+        # Added to save disk space - always save to the same file
+        save_total_limit=1,  # Keep only the most recent checkpoint
+        overwrite_output_dir=args.overwrite_output_dir,  # Overwrite the output directory
     )
 
     # Initialize Trainer
@@ -224,7 +231,7 @@ def main():
         train_dataset=training_dataset,
         data_collator=data_collator,
         tokenizer=tokenizer,
-        optimizers=(get_optimizer(model, training_args), None),  
+        optimizers=(get_optimizer(model, training_args), None),  # Custom optimizer
     )
 
     # Start training
