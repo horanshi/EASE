@@ -99,3 +99,22 @@ python cot_generate.py \
   --output_file vulnerable_cot.jsonl \
   --model <TEACHER_MODEL_NAME_OR_PATH>
 ```
+Finally, we mix the following data sources:
+1. **Vulnerable jailbreak semantic region data**: prompts paired with **safety reasoning responses**.
+2. **Clearly harmful prompt paired with direct refusal response**.
+3. **General task prompt paired with direct response**.
+
+We then further fine-tune the **Phase-1 safety-reasoning-implanted SLM** on this mixed dataset.  
+The goal is to obtain a model that performs **adaptive safety reasoning only on prompts in the vulnerable jailbreak semantic region**.
+
+```
+accelerate launch --multi_gpu --num_processes=2 distill_slm_safety.py \
+  --model_name <YOUR_TARGET_SLM_NAME_OR_PATH> \
+  --dataset_name <MIXED_DATASET_PATH_OR_NAME> \
+  --output_dir <OUTPUT_DIR> \
+  --gradient_accumulation_steps <STEPS> \
+  --max_length <MAX_LEN> \
+  --per_device_train_batch_size <BATCH_SIZE> \
+  --num_train_epochs <EPOCH> \
+  --overwrite_output_dir
+```
