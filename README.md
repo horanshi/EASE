@@ -3,9 +3,10 @@ The official implementation of the paper "EASE: Practical and Efficient Safety A
 
 EASE enables small language models to **selectively activate safety reasoning** for adversarial jailbreak queries while preserving **low inference overhead** for benign and straightforward harmful queries.
 
-📚 **Paper**: https://arxiv.org/abs/2511.06512  
-🤗 [**Hugging Face Models**](https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE): https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE
-🗂️ [**Hugging Face Dataset**](https://huggingface.co/datasets/HaonanShi/EASE-STAR41K-SafetyReasoning-10K): https://huggingface.co/datasets/HaonanShi/EASE-STAR41K-SafetyReasoning-10K
+📚 [**Paper**](https://arxiv.org/abs/2511.06512): [Link](https://arxiv.org/abs/2511.06512)
+🤗 [**Hugging Face Models**](https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE): [Link](https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE)
+
+🗂️ [**Hugging Face Dataset**](https://huggingface.co/datasets/HaonanShi/EASE-STAR41K-SafetyReasoning-10K): [Link](https://huggingface.co/datasets/HaonanShi/EASE-STAR41K-SafetyReasoning-10K)
 
 ---
 
