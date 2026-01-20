@@ -5,7 +5,7 @@ EASE enables small language models to **selectively activate safety reasoning** 
 
 <p align="center">
 <a href="https://arxiv.org/abs/2511.06512">📚 Paper</a> &nbsp; | &nbsp;
-<a href="https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE">🤗 Models</a> &nbsp; | &nbsp;
+<a href="https://huggingface.co/HaonanShi/Qwen2.5-1.5B-Instruct-EASE">🤗 Model(Qwen2.5-1.5B-Instruct-EASE)</a> &nbsp; | &nbsp;
 <a href="https://huggingface.co/datasets/HaonanShi/EASE-STAR41K-SafetyReasoning-10K">🗂️ Dataset</a>
 </p>
 
